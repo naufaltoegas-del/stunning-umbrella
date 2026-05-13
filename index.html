@@ -1,0 +1,883 @@
+# Premium Mini Shop Alat Sholat
+
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini Shop Alat Sholat Premium</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:
+    radial-gradient(circle at top left,#ffb5d2 0%,transparent 25%),
+    radial-gradient(circle at bottom right,#ff5fa2 0%,transparent 25%),
+    linear-gradient(135deg,#ff9ecf,#ff5fa2);
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    backdrop-filter:blur(80px);
+    z-index:-1;
+}
+
+header{
+    position:relative;
+    text-align:center;
+    padding:120px 20px 70px;
+    color:white;
+}
+
+header h1{
+    font-size:52px;
+    font-weight:700;
+    text-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+header p{
+    margin-top:15px;
+    font-size:18px;
+    opacity:0.95;
+}
+
+.shop-name{
+    position:fixed;
+    top:20px;
+    left:20px;
+    background:rgba(255,255,255,0.18);
+    border:1px solid rgba(255,255,255,0.3);
+    backdrop-filter:blur(18px);
+    color:white;
+    padding:12px 22px;
+    border-radius:50px;
+    font-weight:600;
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+    z-index:1000;
+}
+
+.cart{
+    position:fixed;
+    top:20px;
+    right:20px;
+    background:rgba(255,255,255,0.18);
+    border:1px solid rgba(255,255,255,0.3);
+    backdrop-filter:blur(18px);
+    color:white;
+    padding:12px 20px;
+    border-radius:50px;
+    font-weight:600;
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+    cursor:pointer;
+    z-index:1000;
+    transition:0.3s;
+}
+
+.cart:hover{
+    transform:translateY(-3px) scale(1.03);
+}
+
+.nav-buttons{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-bottom:35px;
+}
+
+.nav-buttons button{
+    border:none;
+    padding:12px 28px;
+    border-radius:50px;
+    background:rgba(255,255,255,0.18);
+    color:white;
+    font-weight:600;
+    backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,0.25);
+    transition:0.3s;
+}
+
+.nav-buttons button:hover{
+    background:white;
+    color:#ff3d8b;
+    transform:translateY(-3px);
+}
+
+.search-box{
+    max-width:600px;
+    margin:auto;
+    margin-bottom:50px;
+}
+
+.search-box input{
+    border:none;
+    padding:16px 25px;
+    border-radius:60px;
+    background:rgba(255,255,255,0.18);
+    backdrop-filter:blur(12px);
+    color:white;
+    box-shadow:0 10px 25px rgba(0,0,0,0.12);
+}
+
+.search-box input::placeholder{
+    color:#f5f5f5;
+}
+
+.search-box input:focus{
+    background:rgba(255,255,255,0.22);
+    color:white;
+    box-shadow:none;
+}
+
+.section{
+    display:none;
+}
+
+.hero-box{
+    background:rgba(255,255,255,0.12);
+    border:1px solid rgba(255,255,255,0.22);
+    border-radius:35px;
+    padding:60px 30px;
+    text-align:center;
+    color:white;
+    backdrop-filter:blur(18px);
+    box-shadow:0 15px 35px rgba(0,0,0,0.15);
+}
+
+.hero-box h2{
+    font-size:42px;
+    font-weight:700;
+}
+
+.hero-box p{
+    margin-top:15px;
+    font-size:18px;
+    opacity:0.95;
+}
+
+.product-card{
+    animation:fadeUp 0.7s ease;
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.card{
+    position:relative;
+    border:none;
+    border-radius:38px;
+    overflow:hidden;
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(22px);
+    border:1px solid rgba(255,255,255,0.22);
+    box-shadow:0 20px 50px rgba(0,0,0,0.18);
+    transition:0.45s;
+    color:white;
+}
+
+.card::before{
+    content:'';
+    position:absolute;
+    width:180px;
+    height:180px;
+    background:rgba(255,255,255,0.12);
+    border-radius:50%;
+    top:-80px;
+    right:-60px;
+}
+
+.card:hover{
+    transform:translateY(-14px) scale(1.02);
+    box-shadow:0 30px 70px rgba(0,0,0,0.28);
+}
+
+.card img{
+    height:320px;
+    object-fit:cover;
+    transition:0.5s;
+}
+
+.card:hover img{
+    transform:scale(1.05);
+}
+
+.card-body{
+    position:relative;
+    z-index:2;
+    padding:30px;
+}
+
+.card h5{
+    font-size:24px;
+    font-weight:600;
+}
+
+.price{
+    margin:18px 0;
+    font-size:24px;
+    font-weight:700;
+    color:#fff;
+    text-shadow:0 5px 10px rgba(0,0,0,0.12);
+}
+
+.btn-premium{
+    width:100%;
+    border:none;
+    padding:16px;
+    border-radius:60px;
+    font-weight:700;
+    letter-spacing:0.5px;
+    background:linear-gradient(135deg,#ffffff,#ffe2ef);
+    color:#ff3d8b;
+    transition:0.35s;
+    box-shadow:0 10px 25px rgba(255,255,255,0.18);
+}
+
+.btn-premium:hover{
+    transform:translateY(-4px) scale(1.02);
+    background:white;
+    box-shadow:0 18px 35px rgba(255,255,255,0.28);
+}
+
+.badge-premium{
+    position:absolute;
+    top:18px;
+    left:18px;
+    background:rgba(255,255,255,0.92);
+    color:#ff3d8b;
+    padding:10px 18px;
+    border-radius:50px;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:1px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.14);
+    z-index:3;
+}
+
+.footer{
+    margin-top:80px;
+    padding:35px;
+    text-align:center;
+    color:white;
+    background:rgba(255,255,255,0.1);
+    backdrop-filter:blur(10px);
+}
+
+.modal-content{
+    border:none;
+    border-radius:25px;
+}
+
+@media(max-width:768px){
+
+header{
+    padding-top:140px;
+}
+
+header h1{
+    font-size:36px;
+}
+
+.hero-box h2{
+    font-size:30px;
+}
+
+.card img{
+    height:220px;
+}
+
+.shop-name,
+.cart{
+    transform:scale(0.9);
+}
+
+}
+</style>
+</head>
+<body>
+
+<div class="shop-name">
+<i class="fa-solid fa-star"></i>
+Naufal Alat Sholat
+</div>
+
+<div class="cart" onclick="openCart()">
+<i class="fa-solid fa-cart-shopping"></i>
+<span id="cartCount">0</span>
+</div>
+
+<header>
+<h1>✨ Mini Shop Alat Sholat ✨</h1>
+<p>Elegant • Premium • Exclusive Collection</p>
+</header>
+
+<div class="container">
+
+<div class="nav-buttons">
+<button onclick="showSection('home')">Beranda</button>
+<button onclick="showSection('wanita')">Produk Wanita</button>
+<button onclick="showSection('pria')">Produk Pria</button>
+</div>
+
+<div class="search-box">
+<input type="text" class="form-control" placeholder="Cari produk premium..." onkeyup="searchProduct(this.value)">
+</div>
+
+<div id="home" class="section" style="display:block;">
+
+<div class="premium-home">
+
+<div class="hero-premium">
+<div class="hero-left">
+
+<div class="cute-badge">
+✨ Official Premium Islamic Store
+</div>
+
+<h1>
+Elegan, Modern,<br>
+Dan Tetap Imut 💖
+</h1>
+
+<p>
+Belanja alat sholat aesthetic dengan tampilan modern seperti website resmi brand premium.
+Nikmati koleksi eksklusif dengan nuansa pink luxury yang lembut dan elegan.
+</p>
+
+<div class="hero-buttons">
+<button onclick="showSection('wanita')">
+Produk Wanita
+</button>
+
+<button onclick="showSection('pria')">
+Produk Pria
+</button>
+</div>
+
+<div class="hero-stats">
+<div class="stat-box">
+<h3>1000+</h3>
+<span>Pelanggan</span>
+</div>
+
+<div class="stat-box">
+<h3>Premium</h3>
+<span>Quality</span>
+</div>
+
+<div class="stat-box">
+<h3>24/7</h3>
+<span>Support</span>
+</div>
+</div>
+
+</div>
+
+<div class="hero-right">
+<div class="floating-card">
+<img src="mukena tugas.jpg">
+<div class="floating-text">
+<h4>Mukena Pastel</h4>
+<p>Luxury Collection</p>
+</div>
+</div>
+
+<div class="mini-circle"></div>
+<div class="mini-circle second"></div>
+</div>
+</div>
+
+<div class="feature-section">
+
+<div class="feature-card">
+<div class="feature-icon">🌸</div>
+<h5>Design Imut</h5>
+<p>Tampilan aesthetic pink modern yang lembut dan premium.</p>
+</div>
+
+<div class="feature-card">
+<div class="feature-icon">✨</div>
+<h5>Exclusive Product</h5>
+<p>Koleksi pilihan dengan nuansa luxury islamic shop.</p>
+</div>
+
+<div class="feature-card">
+<div class="feature-icon">🛍️</div>
+<h5>Easy Shopping</h5>
+<p>Belanja lebih nyaman dengan tampilan modern elegan.</p>
+</div>
+
+</div>
+
+</div>
+</div>
+
+<style>
+.premium-home{
+    display:flex;
+    flex-direction:column;
+    gap:40px;
+}
+
+.hero-premium{
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    align-items:center;
+    gap:40px;
+    padding:60px;
+    border-radius:40px;
+    background:rgba(255,255,255,0.12);
+    border:1px solid rgba(255,255,255,0.25);
+    backdrop-filter:blur(18px);
+    box-shadow:0 20px 50px rgba(0,0,0,0.18);
+    overflow:hidden;
+    position:relative;
+}
+
+.hero-premium::before{
+    content:'';
+    position:absolute;
+    width:300px;
+    height:300px;
+    background:rgba(255,255,255,0.15);
+    border-radius:50%;
+    top:-120px;
+    right:-80px;
+}
+
+.hero-left{
+    position:relative;
+    z-index:2;
+    color:white;
+}
+
+.cute-badge{
+    display:inline-block;
+    padding:10px 18px;
+    border-radius:50px;
+    background:rgba(255,255,255,0.2);
+    margin-bottom:25px;
+    font-weight:600;
+    backdrop-filter:blur(10px);
+}
+
+.hero-left h1{
+    font-size:60px;
+    font-weight:700;
+    line-height:1.1;
+    margin-bottom:20px;
+}
+
+.hero-left p{
+    font-size:18px;
+    line-height:1.8;
+    opacity:0.95;
+    max-width:600px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:15px;
+    margin-top:30px;
+    flex-wrap:wrap;
+}
+
+.hero-buttons button{
+    border:none;
+    padding:14px 28px;
+    border-radius:50px;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.hero-buttons button:first-child{
+    background:white;
+    color:#ff3d8b;
+}
+
+.hero-buttons button:last-child{
+    background:rgba(255,255,255,0.18);
+    color:white;
+    border:1px solid rgba(255,255,255,0.3);
+}
+
+.hero-buttons button:hover{
+    transform:translateY(-4px);
+}
+
+.hero-stats{
+    display:flex;
+    gap:18px;
+    margin-top:40px;
+    flex-wrap:wrap;
+}
+
+.stat-box{
+    background:rgba(255,255,255,0.15);
+    padding:18px 22px;
+    border-radius:25px;
+    backdrop-filter:blur(10px);
+    min-width:120px;
+}
+
+.stat-box h3{
+    margin:0;
+    font-size:24px;
+    font-weight:700;
+}
+
+.stat-box span{
+    opacity:0.9;
+}
+
+.hero-right{
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.floating-card{
+    width:320px;
+    background:rgba(255,255,255,0.18);
+    border:1px solid rgba(255,255,255,0.25);
+    border-radius:35px;
+    overflow:hidden;
+    backdrop-filter:blur(18px);
+    box-shadow:0 20px 40px rgba(0,0,0,0.2);
+    animation:floaty 4s ease-in-out infinite;
+}
+
+.floating-card img{
+    width:100%;
+    height:350px;
+    object-fit:cover;
+}
+
+.floating-text{
+    padding:20px;
+    color:white;
+}
+
+.floating-text h4{
+    font-weight:700;
+}
+
+.mini-circle{
+    position:absolute;
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.15);
+    top:-20px;
+    left:20px;
+    backdrop-filter:blur(10px);
+}
+
+.mini-circle.second{
+    width:80px;
+    height:80px;
+    bottom:10px;
+    right:10px;
+    left:auto;
+    top:auto;
+}
+
+@keyframes floaty{
+    0%{transform:translateY(0px);}
+    50%{transform:translateY(-12px);}
+    100%{transform:translateY(0px);}
+}
+
+.feature-section{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.feature-card{
+    background:rgba(255,255,255,0.14);
+    border:1px solid rgba(255,255,255,0.2);
+    border-radius:30px;
+    padding:35px;
+    text-align:center;
+    color:white;
+    backdrop-filter:blur(15px);
+    transition:0.3s;
+}
+
+.feature-card:hover{
+    transform:translateY(-8px);
+}
+
+.feature-icon{
+    font-size:45px;
+    margin-bottom:20px;
+}
+
+.feature-card h5{
+    font-size:22px;
+    font-weight:700;
+    margin-bottom:12px;
+}
+
+.feature-card p{
+    opacity:0.95;
+    line-height:1.7;
+}
+
+@media(max-width:992px){
+
+.hero-premium{
+    grid-template-columns:1fr;
+    padding:35px;
+}
+
+.hero-left h1{
+    font-size:42px;
+}
+
+.hero-right{
+    margin-top:20px;
+}
+
+.floating-card{
+    width:100%;
+    max-width:340px;
+}
+
+}
+
+@media(max-width:600px){
+
+.hero-left h1{
+    font-size:34px;
+}
+
+.hero-premium{
+    padding:25px;
+}
+
+.hero-stats{
+    flex-direction:column;
+}
+
+.stat-box{
+    width:100%;
+}
+
+}
+</style>
+
+<div id="wanita" class="section"> class="section">
+<div class="row g-5 align-items-stretch">
+
+<div class="col-lg-4 col-md-6 product-card">
+<div class="card h-100 text-center position-relative">
+<div class="badge-premium">BEST SELLER</div>
+<img src="sajadah tugas.jpg" class="card-img-top">
+<div class="card-body">
+<h5>Sajadah Aesthetic Pink</h5>
+<p class="price">Rp 11.329.000</p>
+<button class="btn-premium" onclick="addToCart('Sajadah Aesthetic Pink',11329000)">
+<i class="fa-solid fa-bag-shopping"></i>
+Tambah ke Keranjang
+</button>
+</div>
+</div>
+</div>
+
+<div class="col-lg-4 col-md-6 product-card">
+<div class="card h-100 text-center position-relative">
+<div class="badge-premium">PREMIUM</div>
+<img src="mukena tugas.jpg" class="card-img-top">
+<div class="card-body">
+<h5>Mukena Pastel</h5>
+<p class="price">Rp 1.296.000</p>
+<button class="btn-premium" onclick="addToCart('Mukena Pastel',1296000)">
+<i class="fa-solid fa-bag-shopping"></i>
+Tambah ke Keranjang
+</button>
+</div>
+</div>
+</div>
+
+<div class="col-lg-4 col-md-6 product-card">
+<div class="card h-100 text-center position-relative">
+<div class="badge-premium">LIMITED</div>
+<img src="tugas tasbih.jpg" class="card-img-top">
+<div class="card-body">
+<h5>Tasbih Aesthetic</h5>
+<p class="price">Rp 13.643.000</p>
+<button class="btn-premium" onclick="addToCart('Tasbih Aesthetic',13643000)">
+<i class="fa-solid fa-bag-shopping"></i>
+Tambah ke Keranjang
+</button>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div id="pria" class="section">
+<div class="row g-5 align-items-stretch">
+
+<div class="col-lg-4 col-md-6 product-card">
+<div class="card h-100 text-center position-relative">
+<div class="badge-premium">EXCLUSIVE</div>
+<img src="sarung tugas.jpg" class="card-img-top">
+<div class="card-body">
+<h5>Sarung Premium</h5>
+<p class="price">Rp 850.000</p>
+<button class="btn-premium" onclick="addToCart('Sarung Premium',850000)">
+<i class="fa-solid fa-bag-shopping"></i>
+Tambah ke Keranjang
+</button>
+</div>
+</div>
+</div>
+
+<div class="col-lg-4 col-md-6 product-card">
+<div class="card h-100 text-center position-relative">
+<div class="badge-premium">NEW</div>
+<img src="PECI.webp" class="card-img-top">
+<div class="card-body">
+<h5>Peci Bordir</h5>
+<p class="price">Rp 450.000</p>
+<button class="btn-premium" onclick="addToCart('Peci Bordir',450000)">
+<i class="fa-solid fa-bag-shopping"></i>
+Tambah ke Keranjang
+</button>
+</div>
+</div>
+</div>
+
+<div class="col-lg-4 col-md-6 product-card">
+<div class="card h-100 text-center position-relative">
+<div class="badge-premium">LUXURY</div>
+<img src="QURAN TIK.jpg" class="card-img-top">
+<div class="card-body">
+<h5>Al-Qur'an Premium</h5>
+<p class="price">Rp 2.250.000</p>
+<button class="btn-premium" onclick="addToCart(`Al-Qur'an Premium`,2250000)">
+<i class="fa-solid fa-bag-shopping"></i>
+Tambah ke Keranjang
+</button>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+
+<div class="footer">
+© 2026 Naufal Alat Sholat • Premium Islamic Store
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function addToCart(name,price){
+    cart.push({name,price});
+    localStorage.setItem("cart",JSON.stringify(cart));
+    updateCart();
+
+    const toast = document.createElement('div');
+    toast.innerHTML = `✨ ${name} ditambahkan ke keranjang`;
+
+    toast.style.position = 'fixed';
+    toast.style.bottom = '30px';
+    toast.style.right = '30px';
+    toast.style.padding = '15px 25px';
+    toast.style.background = 'white';
+    toast.style.color = '#ff3d8b';
+    toast.style.borderRadius = '50px';
+    toast.style.fontWeight = '600';
+    toast.style.boxShadow = '0 10px 30px rgba(0,0,0,0.2)';
+    toast.style.zIndex = '9999';
+
+    document.body.appendChild(toast);
+
+    setTimeout(()=>{
+        toast.remove();
+    },2000);
+}
+
+function updateCart(){
+    document.getElementById("cartCount").innerText = cart.length;
+}
+
+function openCart(){
+
+    if(cart.length===0){
+        alert('Keranjang masih kosong');
+        return;
+    }
+
+    let text = '🛒 Keranjang Belanja Premium\n\n';
+    let total = 0;
+
+    cart.forEach((item,index)=>{
+        text += `${index+1}. ${item.name}\nRp ${item.price.toLocaleString()}\n\n`;
+        total += item.price;
+    });
+
+    text += `Total Belanja:\nRp ${total.toLocaleString()}`;
+
+    alert(text);
+}
+
+function showSection(section){
+    document.querySelectorAll('.section').forEach(s=>s.style.display='none');
+    document.getElementById(section).style.display='block';
+}
+
+function searchProduct(keyword){
+
+    let cards = document.querySelectorAll('.product-card');
+
+    cards.forEach(card=>{
+        let title = card.innerText.toLowerCase();
+
+        card.style.display = title.includes(keyword.toLowerCase())
+        ? ''
+        : 'none';
+    });
+}
+
+updateCart();
+</script>
+
+</body>
+</html>
+```
